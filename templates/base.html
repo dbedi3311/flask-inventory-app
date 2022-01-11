@@ -1,0 +1,170 @@
+{% extends "layout.html" %}
+{% block body %}
+
+
+    <div class="ui container" style="flex: 1; margin-top: 50px; padding-bottom: 50px;">
+        <h1 class="ui center aligned header">Inventory Tracker</h1>
+
+        <h3 class="ui center aligned">Keep track of the stock, pricing, and status of your inventory!</h3>
+
+        <br>
+
+        <form class="ui form" action="/add" method="POST">
+            
+                <h4 class="ui dividing large header">Inventory Information</h4>
+
+                <div class="field">
+                    <label style="font-size: 110%;">item title
+                        <i class="ui tiny yellow circle icon" style="vertical-align: text-top;"></i>
+                        <span style="float: right; font-weight: normal;"><i class="ui small yellow circle icon"></i>= optional </span>
+                    </label>
+                    
+                    <div class="field">
+                        <input type="text" name="title" placeholder="enter item name...">
+                    </div>
+                </div>
+                
+                <div class="three fields">
+                    <div class="field">
+                        <label style="font-size: 110%;">quantity
+                            <i class="ui tiny yellow circle icon" style="vertical-align: text-top;"></i>
+                        </label>
+                        <input type="text" name="stock" placeholder="50...">
+                    </div>
+
+
+                    <div class="field">
+                        <label style="font-size: 110%;">order status
+                            <i class="ui tiny yellow circle icon" style="vertical-align: text-top;"></i>
+                        </label>
+                        <select name="status" class="ui fluid dropdown">
+                            <option value=""></option>
+                            <option value="delivered">delivered</option>
+                            <option value="ordered">ordered</option>
+                            <option value="to-be-processed">to be processed</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label style="font-size: 110%;">price ($USD) – converted to .XX
+                            <i class="ui tiny yellow circle icon" style="vertical-align: text-top;"></i>
+                        </label>
+                        <div class="ui labeled input">
+                            <label for="cost" class="ui label">$</label>
+                            <input id="cost" type="text" name="price" placeholder="20.33">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field">
+                        <label style="font-size: 110%;">description
+                            <i class="ui tiny yellow circle icon" style="vertical-align: text-top;"></i>
+                        </label>
+                        <textarea rows="5" type="text" name="description" placeholder="provide a detailed description here..."></textarea>
+                    </div>
+
+                    <div class="two wide field" style="margin-top: 20px;">
+                        
+                    </div>
+                </div>
+
+            
+            <button class="ui positive button" type="submit">add</button>
+
+        </form>
+
+        <form action="/download" method="GET">
+            <button class="ui purple right floated labeled icon button" type="submit">
+                <i class="download icon"></i>
+                download (.csv)
+            </button>
+        </form>
+
+        <div class="ui items">
+        {% for item in item_list %}
+
+            <div class="ui item">
+                <div class="content">
+                    <div class="ui header">{{ item.id }}. {{ item.title }}</div>
+                    <div class="meta">
+                        {% if item.price != None %}
+                            <span class="price" style="font-size: 15px; margin-right: 2%;">cost: ${{ item.price }}</span>
+                        {% else %}
+                            <span class="price" style="font-size: 15px; margin-right: 2%;">cost: </span>
+                        {% endif %}
+
+                        <span class="stock" style="font-size: 15px;">in stock: {{ item.stock }}</span>
+                        <span class="ui right floated">UTC: {{ item.date }}</span>
+                    </div>
+
+                    <div class="description">
+                        <p>{{ item.description }}</p>
+                    </div>
+
+
+                      <div class="extra">
+                        {% if item.complete == False %}
+                            <span class="ui gray label">
+                                <i class="red x icon"></i>
+                                not complete
+                            </span>
+                        {% else %}
+                            <span class="ui green label">
+                                <i class="white check icon"></i>
+                                complete
+                            </span>
+                        {% endif %}
+
+                        {% if item.status == "delivered" %}
+                        <span class="ui blue label">
+                            <i class="white truck icon"></i>
+                            delivered
+                        </span>
+                        {% elif item.status == "ordered" %}
+                        <span class="ui yellow label">
+                            <i class="white box icon"></i>
+                            ordered
+                        </span>
+
+                        {% elif item.status == "to-be-processed"%}
+                        <span class="ui orange label">
+                            <i class="white sync icon"></i>
+                            to be processed
+                        </span>
+
+                        {% endif %}
+                        
+                        <a href="/delete/{{ item.id }}">
+                            <button class="ui negative right floated labeled icon button">
+                                <i class="trash alternate icon"></i>
+                                delete
+                            </button>
+                        </a>
+    
+                        <a href="/edit/{{ item.id }}">
+                            <button class="ui right floated labeled icon primary button">
+                                <i class="edit icon"></i>
+                                edit
+                            </button>
+                        </a>
+
+                        <a href="/update/{{ item.id }}">
+                            <button class="ui right floated labeled icon black button">
+                                <i class="white check icon"></i>
+                                update
+                            </button>
+                        </a>
+    
+                    </div>
+                </div>
+
+                
+        
+            </div>
+
+        {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

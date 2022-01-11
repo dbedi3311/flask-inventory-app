@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+{% block body %}
+
+    <div class="ui container" style="flex: 1; margin-top: 50px; padding-bottom: 50px;">
+        <h1 class="ui center aligned header">Inventory Tracker</h1>
+
+        <h3 class="ui center aligned">modify the fields of item {{ item.id }} below!</h3>
+
+        <br>
+
+        <form class="ui form" action="/edit/{{ item.id }}" method="POST">
+            
+                <h4 class="ui dividing header">Inventory Information</h4>
+
+                <div class="field">
+                    <label>item title</label>
+                    <div class="field">
+                        <input type="text" name="title" value="{{ item.title }}">
+                    </div>
+                </div>
+                
+                <div class="three fields">
+                    <div class="field">
+                        <label>quantity</label>
+                        <input type="text" name="stock" value="{{ item.stock }}">
+                    </div>
+
+
+                    <div class="field">
+                        <label>order status</label>
+                        <select name="status" class="ui fluid dropdown" value="{{ item.status }}">
+                            <option value=""></option>
+                            <option value="delivered">delivered</option>
+                            <option value="ordered">ordered</option>
+                            <option value="to-be-processed">to be processed</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>price ($USD) – converted to .XX</label>
+                        <div class="ui labeled input">
+                            <label for="cost" class="ui label">$</label>
+                            {% if item.price != None %}
+                                <input id="cost" type="text" name="price" value="{{ item.price }}">
+                            {% else %}
+                                <input id="cost" type="text" name="price" value="">
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field">
+                        <label>description</label>
+                        <textarea rows="5" type="text" name="description">{{ item.description }}</textarea>
+                    </div>
+
+                </div>
+
+            
+            <button class="ui orange button" type="submit">edit</button>
+
+        </form>
+
+
+    </div>
+
+{% endblock %}

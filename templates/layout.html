@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Divjot Bedi">
+    <title>Inventory Application</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+</head>
+
+<!-- for the sticky footer at the bottom of the page -->
+<body style="display: flex; min-height: 100; flex-direction: column;">
+
+    <!-- below portion of code taken from Flask documentation: https://flask.palletsprojects.com/en/2.0.x/patterns/flashing/ -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="ui negative message">
+            <div class="header">
+                error generated
+            </div>
+
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
+    {% block body %}{% endblock %}
+
+    <!-- footer on bottom of the page. -->
+    <footer class="ui white vertical top attached segment footer">
+        <div class="ui container">
+            Made by <strong>Divjot Bedi</strong> with Flask, SQLAlchemy, SQLite, & Semantic UI
+        </div>
+    </footer>
+</body>
