@@ -10,8 +10,22 @@ CRUD functionality (Creating new inventory, Reading inventory items in list form
 
 
 ## Running on Local Machine
-Verify that you have Python 3 installed on your local machine. You can download it at: 
+Verify that you have Python 3 installed on your local machine. You can download it at: [https://www.python.org/](https://www.python.org/)
 
+First clone the repository to a working directory using git. After the project is cloned, navigate to the directory which includes the requirements.txt file.
 
+Proceeding this, open a terminal/command prompt and run the following command:
+
+```
+ pip install -r requirements.txt 
+```
+
+After this is complete, run:
+
+```
+python3 app.py
+```
+
+This should bring up the application
 
 ## Backend Specifications
