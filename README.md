@@ -25,7 +25,9 @@ After this is complete, run:
 ```
 python3 app.py
 ```
-
 This should bring up the application
 
+![image](https://user-images.githubusercontent.com/29437601/150395316-aafd7b3b-8128-42c8-805a-5233158faad4.png)
+
 ## Backend Specifications
+SQLite database with SQLAlchemy for Object-relational mapping (ORM).
