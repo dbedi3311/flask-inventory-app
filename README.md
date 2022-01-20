@@ -32,6 +32,6 @@ This should bring up the application
 ## Backend Specifications
 SQLite database with SQLAlchemy for Object-relational mapping (ORM).
 
-To look at the backend check out the app.py file [app.py](app.py). It contains the Item object. 
+To look at the backend check out the app.py file [app.py](app.py). It contains the Item object and all the routing for the page.
 
 
