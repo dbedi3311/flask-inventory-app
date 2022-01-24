@@ -17,14 +17,16 @@
     <!-- below portion of code taken from Flask documentation: https://flask.palletsprojects.com/en/2.0.x/patterns/flashing/ -->
     {% with messages = get_flashed_messages() %}
         {% if messages %}
-        <div class="ui negative message">
-            <div class="header">
-                error generated
-            </div>
+        <div style="display: inline;">
+            <div class="ui negative message">
+                <div class="header">
+                    error generated
+                </div>
 
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </div>
         </div>
         {% endif %}
     {% endwith %}
